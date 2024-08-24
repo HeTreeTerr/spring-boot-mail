@@ -109,6 +109,8 @@ public class NoticeServiceImpl implements NoticeService {
                 if(zipContentDTO.getFileName().endsWith(fileName)){
                     //todo 上传第三方服务器
                     notice.setUrl(zipContentDTO.getFileName());
+                    //base64
+                    //notice.setUrl(zipContentDTO.getFileBase64());
                     break;
                 }
                 //最后一次还没有匹配，置空
