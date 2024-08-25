@@ -39,15 +39,15 @@ public class ReceiveEmailServiceImpl implements ReceiveEmailService {
     public Pair<Boolean,Object> receiveEmail() {
         //POP3主机名
         //String host = "pop3.163.com";
-        String host = "pop.qq.com";
+        String host = mallConfig.getPop3Host();
         //设置传输协议
         String protocol = "pop3";
         //用户账号
-        String username = "3110708879@qq.com";
+        String username = mallConfig.getUsername();
         //密码或者授权码
-        String password = "hsyvwpjupufmdgai";
+        String password = mallConfig.getPassword();
         //端口号
-        Integer port = 995;
+        Integer port = mallConfig.getPop3Port();
 
         /*
          * 获取Session

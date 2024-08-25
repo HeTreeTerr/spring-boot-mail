@@ -52,7 +52,7 @@ public class NoticeServiceImpl implements NoticeService {
                 if(!StringUtils.isEmpty(dto.getTextContent())){
                     context = XmlUtil.analyzeXml(dto.getTextContent().replaceAll("\\s+|\\u00A0+",""))
                             .replaceAll("&nbsp;"," ");
-                    context = StringUtils.substringBetween(context,mallConfig.getMallContextBegin(),mallConfig.getGetMallContextEnd());
+                    context = StringUtils.substringBetween(context,mallConfig.getMallContextBegin(),mallConfig.getMallContextEnd());
                 }else {
                     context = null;
                 }

@@ -18,12 +18,24 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 public class MallConfig {
 
-    @Value(value = "${com.hss.mall.subject.key}")
+    @Value(value = "${com.hss.mall.subject.key:#{null }}")
     private String mallSubjectKey;
 
-    @Value(value = "${com.hss.mall.context.begin}")
+    @Value(value = "${com.hss.mall.context.begin:#{null }}")
     private String mallContextBegin;
 
-    @Value(value = "${com.hss.mall.context.end}")
-    private String getMallContextEnd;
+    @Value(value = "${com.hss.mall.context.end:#{null }}")
+    private String mallContextEnd;
+
+    @Value(value = "${com.hss.mall.pop3.host:#{null }}")
+    private String pop3Host;
+
+    @Value(value = "${com.hss.mall.pop3.port:#{null }}")
+    private Integer pop3Port;
+
+    @Value(value = "${com.hss.mall.username:#{null }}")
+    private String username;
+
+    @Value(value = "${com.hss.mall.password:#{null }}")
+    private String password;
 }
