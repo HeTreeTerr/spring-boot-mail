@@ -1,7 +1,7 @@
 package com.hss.service.impl;
 
-import com.hss.config.MallConfig;
-import com.hss.dao.MallContentDTO;
+import com.hss.config.MailConfig;
+import com.hss.dao.mailContentDTO;
 import com.hss.service.ReceiveEmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
@@ -33,21 +33,21 @@ public class ReceiveEmailServiceImpl implements ReceiveEmailService {
     private String tempFilePath;
 
     @Autowired
-    private MallConfig mallConfig;
+    private MailConfig mailConfig;
 
     @Override
     public Pair<Boolean,Object> receiveEmail() {
         //POP3主机名
         //String host = "pop3.163.com";
-        String host = mallConfig.getPop3Host();
+        String host = mailConfig.getPop3Host();
         //设置传输协议
         String protocol = "pop3";
         //用户账号
-        String username = mallConfig.getUsername();
+        String username = mailConfig.getUsername();
         //密码或者授权码
-        String password = mallConfig.getPassword();
+        String password = mailConfig.getPassword();
         //端口号
-        Integer port = mallConfig.getPop3Port();
+        Integer port = mailConfig.getPop3Port();
 
         /*
          * 获取Session
@@ -90,7 +90,7 @@ public class ReceiveEmailServiceImpl implements ReceiveEmailService {
             // 获得邮件夹Folder内的所有邮件Message对象，一个Message代表一个邮件
             Message[] messages = folder.getMessages();
 
-            List<MallContentDTO> dtoList = new ArrayList<>();
+            List<mailContentDTO> dtoList = new ArrayList<>();
             for (Message message : messages) {
                 /*解析邮件*/
                 log.info("=====================");
@@ -100,12 +100,12 @@ public class ReceiveEmailServiceImpl implements ReceiveEmailService {
                 log.info("时间:" + message.getSentDate());
                 //================== 获取邮件内容==================
                 // 仅包含正文的简单邮件
-                if(!StringUtils.isEmpty(mallConfig.getMallSubjectKey()) && subject.contains(mallConfig.getMallSubjectKey())){
+                if(!StringUtils.isEmpty(mailConfig.getMailSubjectKey()) && subject.contains(mailConfig.getMailSubjectKey())){
                     if (message.isMimeType("TEXT/*")) {
                         log.info("邮件正文: " + message.getContent());
                     } else {
                         // 解析稍复杂邮件
-                        MallContentDTO dto = new MallContentDTO();
+                        mailContentDTO dto = new mailContentDTO();
                         parseMessage((MimeMultipart) message.getContent(),dto);
                         dtoList.add(dto);
                     }
@@ -127,7 +127,7 @@ public class ReceiveEmailServiceImpl implements ReceiveEmailService {
     /**
      * 解析邮件
      */
-    public void parseMessage (MimeMultipart part,MallContentDTO dto) throws MessagingException, IOException {
+    public void parseMessage (MimeMultipart part,mailContentDTO dto) throws MessagingException, IOException {
         byte[] bytes = new byte[1024];
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 

@@ -11,9 +11,9 @@
     </parent>
 
     <groupId>com.hss</groupId>
-    <artifactId>spring-boot-mall</artifactId>
+    <artifactId>spring-boot-mail</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-mall</name>
+    <name>spring-boot-mail</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

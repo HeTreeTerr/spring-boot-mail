@@ -11,7 +11,7 @@ import lombok.Data;
  * @date 2024-08-24
  */
 @Data
-public class MallContentDTO {
+public class mailContentDTO {
 
     /** 文本格式 */
     private String textContent;

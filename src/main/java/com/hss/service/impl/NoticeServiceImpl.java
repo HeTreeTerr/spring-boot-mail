@@ -1,8 +1,8 @@
 package com.hss.service.impl;
 
 import com.hss.bean.Notice;
-import com.hss.config.MallConfig;
-import com.hss.dao.MallContentDTO;
+import com.hss.config.MailConfig;
+import com.hss.dao.mailContentDTO;
 import com.hss.dao.ZipContentDTO;
 import com.hss.service.NoticeService;
 import com.hss.service.ReceiveEmailService;
@@ -33,7 +33,7 @@ public class NoticeServiceImpl implements NoticeService {
     private SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Autowired
-    private MallConfig mallConfig;
+    private MailConfig mailConfig;
 
     @Autowired
     private ReceiveEmailService receiveEmailService;
@@ -43,16 +43,16 @@ public class NoticeServiceImpl implements NoticeService {
         //获取邮件内容
         Pair<Boolean,Object> pair = receiveEmailService.receiveEmail();
         if(pair.getKey()){
-            List<MallContentDTO> contentDTOS = (List<MallContentDTO>) pair.getValue();
+            List<mailContentDTO> contentDTOS = (List<mailContentDTO>) pair.getValue();
             List<Notice> noticeListRes = new ArrayList<>();
-            for (MallContentDTO dto : contentDTOS){
+            for (mailContentDTO dto : contentDTOS){
                 String context;
                 List<Notice> noticeList = new ArrayList<>();
                 //内容解析
                 if(!StringUtils.isEmpty(dto.getTextContent())){
                     context = XmlUtil.analyzeXml(dto.getTextContent().replaceAll("\\s+|\\u00A0+",""))
                             .replaceAll("&nbsp;"," ");
-                    context = StringUtils.substringBetween(context,mallConfig.getMallContextBegin(),mallConfig.getMallContextEnd());
+                    context = StringUtils.substringBetween(context,mailConfig.getMailContextBegin(),mailConfig.getMailContextEnd());
                 }else {
                     context = null;
                 }
